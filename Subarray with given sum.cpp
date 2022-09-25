@@ -1,26 +1,40 @@
-class Solution{
-  public:
-    vector <int> countDistinct (int A[], int n, int k)
+class Solution
+{
+    public:
+    //Function to find a continuous sub-array which adds up to a given number.
+    vector<int> subarraySum(int arr[], int n, long long s)
     {
-        //fixed sliding window
-        int i=0,j=0;
-        vector<int>ans;
-        unordered_map<int,int>mp;
-        while(j<n){
-            mp[A[j]]++;
-            
-            //reach window size
-            if(j-i+1 <k) {j++;}
-          
-            else if(j-i+1 == k){
-                ans.push_back(mp.size());
-            //remove calculation for i
-                mp[A[i]]--;
-                if(mp[A[i]]==0) mp.erase(A[i]);
-                i++;
-                j++;
-            }
+        // Your code here
+    //variable sliding window
+    int i=0,j=0;
+    int curr_sum=0;
+    vector<int>ans;
+ if(s==0) return {-1} ; 
+ 
+    while(j<n){
+        curr_sum+=arr[j] ; 
+        
+        if(curr_sum < s) j++;
+        
+        else if(curr_sum==s){
+           return{i+1,j+1};
         }
-        return ans;
+        
+        else if(curr_sum > s){
+            //remove calculation for i
+            while(curr_sum>s){
+                curr_sum-=arr[i];
+                i++;
+            }
+          
+           if(curr_sum==s){
+           return{i+1,j+1};
+        }
+        
+            j++;
+        }
+    }
+    return {-1} ; 
+    
     }
 };
