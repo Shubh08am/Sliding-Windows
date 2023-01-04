@@ -1,4 +1,5 @@
-
+Question:- Given an array of size N and an integer K, return the count of distinct numbers in all windows of size K.
+ 
 class Solution{
   public:
     vector <int> countDistinct (int A[], int n, int k)
